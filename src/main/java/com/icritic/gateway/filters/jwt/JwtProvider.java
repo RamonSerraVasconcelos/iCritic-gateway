@@ -40,6 +40,7 @@ public class JwtProvider {
 
     public String decryptToken(String token) {
         return Jwts.builder()
+                .setId(getTokenId(token))
                 .claim("userId", getUserIdFromToken(token))
                 .claim("role", getUserRoleFromToken(token))
                 .compact();
