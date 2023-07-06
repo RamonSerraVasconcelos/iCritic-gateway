@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icritic-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: icritic-gateway
+  template:
+    metadata:
+      labels:
+        app: icritic-gateway
+    spec:
+      containers:
+        - name: icritic-gateway
+          image: ramonsvasconcelos/icritic-gateway:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: icritic-gateway-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: icritic-gateway
+  ports:
+    - port: 80
+      targetPort: 8080
