@@ -16,6 +16,9 @@ public class RouteConfiguration {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
+                .route("login", r -> r.path("/register")
+                        .uri("http://localhost:8081/register"))
+
                 .route("login", r -> r.path("/login")
                         .uri("http://localhost:8081/login"))
 
