@@ -24,7 +24,7 @@ public class RouteConfiguration {
         final String USERS_SERVICE = servicesProperties.getIcriticUsersServiceAddress();
 
         return builder.routes()
-                .route("login", r -> r.path("/register")
+                .route("register", r -> r.path("/register")
                         .uri(USERS_SERVICE + "/register"))
 
                 .route("login", r -> r.path("/login")
