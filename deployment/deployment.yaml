@@ -15,9 +15,14 @@ spec:
       containers:
         - name: icritic-gateway
           image: ramonsvasconcelos/icritic-gateway:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          envFrom:
+          - configMapRef:
+              name: icritic-gateway-configmap
+          - secretRef:
+              name: icritic-gateway-secrets
           volumeMounts:
             - name: secrets-store01-inline
               mountPath: "/mnt/secrets-store"
