@@ -12,6 +12,9 @@ public class JwtProvider {
     @Value("${application.properties.jwtSecret}")
     private String SECRET;
 
+    @Value("${application.properties.services.icritic-users-service-address}")
+    private String USERS_SERVICE;
+
     public boolean validateToken(String token) {
         JwtParser jwtParser = createTokenParser();
 

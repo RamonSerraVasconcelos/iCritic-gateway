@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icritic-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: icritic-gateway
+  template:
+    metadata:
+      labels:
+        app: icritic-gateway
+    spec:
+      containers:
+        - name: icritic-gateway
+          image: ramonsvasconcelos/icritic-gateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+          - configMapRef:
+              name: icritic-gateway-configmap
+          - secretRef:
+              name: icritic-gateway-secrets
+          volumeMounts:
+            - name: secrets-store01-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+      volumes:
+        - name: secrets-store01-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "icritic-stage-keyvault-provider"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: icritic-gateway-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: icritic-gateway
+  ports:
+    - port: 80
+      targetPort: 8080
