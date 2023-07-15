@@ -4,3 +4,4 @@ metadata:
   name: icritic-gateway-configmap
 data:
   ICRITIC_JWT_SECRET: $_ICRITIC_JWT_SECRET
+  ICRITIC_USERS_SERVICE_ADDRESS: "http://10.0.250.158:8081"
