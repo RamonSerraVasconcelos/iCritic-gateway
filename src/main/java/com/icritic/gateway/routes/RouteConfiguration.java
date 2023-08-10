@@ -33,8 +33,11 @@ public class RouteConfiguration {
                 .route("refresh", r -> r.path("/refresh")
                         .uri(USERS_SERVICE + "/refresh"))
 
-                .route("refresh", r -> r.path("/forgot-password")
+                .route("forgot-password", r -> r.path("/forgot-password")
                         .uri(USERS_SERVICE + "/forgot-password"))
+
+                .route("reset-password", r -> r.path("/reset-password")
+                        .uri(USERS_SERVICE + "/reset-password"))
 
                 .route("users", r -> r.path("/users/**")
                         .filters(f -> f.filter(authenticationFilter))
