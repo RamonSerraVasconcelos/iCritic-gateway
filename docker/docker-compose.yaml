@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres
+  icritic_postgres:
+    image: postgres:16
+    container_name: icritic_postgres
     restart: always
     environment:
       POSTGRES_USER: root
@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - icritic_postgres_data:/var/lib/postgresql/data
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -60,5 +60,5 @@ services:
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
 volumes:
   mongodb_data:
-  postgres_data:
+  icritic_postgres_data:
     driver: local
