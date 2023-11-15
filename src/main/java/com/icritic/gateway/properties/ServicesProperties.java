@@ -12,4 +12,5 @@ import org.springframework.context.annotation.Configuration;
 public class ServicesProperties {
 
     private String icriticUsersServiceAddress;
+    private String icriticMoviesServiceAddress;
 }
