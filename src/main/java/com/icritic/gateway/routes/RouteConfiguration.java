@@ -23,6 +23,8 @@ public class RouteConfiguration {
 
         final String USERS_SERVICE = servicesProperties.getIcriticUsersServiceAddress();
 
+        final String MOVIES_SERVICE = servicesProperties.getIcriticMoviesServiceAddress();
+
         return builder.routes()
                 .route("register", r -> r.path("/register")
                         .uri(USERS_SERVICE + "/register"))
@@ -45,6 +47,10 @@ public class RouteConfiguration {
                 .route("users", r -> r.path("/users/**")
                         .filters(f -> f.filter(authenticationFilter))
                         .uri(USERS_SERVICE + "/users"))
+
+                .route("movies", r -> r.path("/movies/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri(MOVIES_SERVICE + "/movies"))
                 .build();
     }
 }
