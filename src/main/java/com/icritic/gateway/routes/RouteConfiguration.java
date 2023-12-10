@@ -48,6 +48,9 @@ public class RouteConfiguration {
                         .filters(f -> f.filter(authenticationFilter))
                         .uri(USERS_SERVICE + "/users"))
 
+                .route("users", r -> r.path("/countries/**")
+                        .uri(USERS_SERVICE + "/countries"))
+
                 .route("movies", r -> r.path("/movies/**")
                         .filters(f -> f.filter(authenticationFilter))
                         .uri(MOVIES_SERVICE + "/movies"))
